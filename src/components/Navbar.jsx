@@ -1,8 +1,29 @@
-import React from 'react'
+import { useContext } from "react";
+import axios from "axios";
 import { Link } from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext.jsx"
 
 function Navbar() {
-    let auth = false;
+    const navigate = useNavigate()
+    const { auth, setAuth } = useContext(AuthContext);
+
+
+    const loggingOut = async () => {
+        try {
+            await axios.post(
+                "http://localhost:5000/api/v1/user/logout",
+                {},
+                { withCredentials: true }
+            );
+            setAuth(false)
+            navigate("/login");
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+
     return (
         <>
             <div className="navbar bg-base-100 shadow-sm">
@@ -42,7 +63,7 @@ function Navbar() {
                             <div className="w-10 rounded-full">
                                 <img
                                     alt="Tailwind CSS Navbar component"
-                                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                                    src={auth ? "" : "https://cdn-icons-png.flaticon.com/512/9187/9187604.png"} />
                             </div>
                         </div>
                         <ul
@@ -53,12 +74,12 @@ function Navbar() {
                                 auth ? (
                                     <>
                                         <li>
-                                            <Link to={"/profile"} className="justify-between">
+                                            <Link to={"/user/profile"} className="justify-between">
                                                 Profile
                                             </Link>
                                         </li>
                                         <li><a>Settings</a></li>
-                                        <li><a>Logout</a></li>
+                                        <li><a onClick={loggingOut}>Logout</a></li>
                                     </>
                                 ) : (
                                     <>

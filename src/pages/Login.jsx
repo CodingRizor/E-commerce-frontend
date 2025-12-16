@@ -1,9 +1,13 @@
 import axios from 'axios'
-import React from 'react'
+import {useContext} from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../context/AuthContext'
 
 export default function Login() {
   
+const navigate = useNavigate()
+const { setAuth } = useContext(AuthContext);
 
   const {
     register,
@@ -17,11 +21,13 @@ export default function Login() {
     try {
       let BACKEND_URL = "http://localhost:5000/api/v1/user/login"
       const res = await axios.post(BACKEND_URL, data, {
-        method: "POST"
+        method: "POST",
+        withCredentials: true
       })
       console.log(res)
       if(res.status == 200){
-        alert(res.data.message)
+        setAuth(true)
+        navigate("/user/profile")
       }
        if(res.status == 404){
         alert("Error Logging In")
