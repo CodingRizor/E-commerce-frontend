@@ -8,8 +8,11 @@ import About from './pages/About'
 import Signup from './pages/Signup'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
+import Settings from "./pages/Settings.jsx"
 import { ProtectedRoute } from "./context/ProtectedRoute.jsx"
 import UserDashboard from './pages/UserDashboard.jsx'
+import ForgotPassword from './pages/ForgotPassword.jsx'
+import ChangePassword from './pages/ChangePassword.jsx'
 
 function App() {
   return (
@@ -22,17 +25,24 @@ function App() {
             <Route path='/products' element={<Products />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='/about-us' element={<About />} />
-            {/* <Route path="/profile" element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            } /> */}
+            <Route path="/forgot-password" element={<ForgotPassword/>}/>
+            <Route path="/change-password" element={<ChangePassword/>}/>
 
-            <Route path='/user' element={<UserDashboard />}>
+            <Route path='/user' element={
+              <ProtectedRoute>
+              <UserDashboard />
+              </ProtectedRoute>
+              }>
               <Route path='profile' element={<Profile />} />
             </Route>
             <Route path='/signup' element={<Signup />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/settings" element={
+              <ProtectedRoute>
+              <Settings />
+              </ProtectedRoute>
+              } />
+
           </Routes>
         </main>
       </div>

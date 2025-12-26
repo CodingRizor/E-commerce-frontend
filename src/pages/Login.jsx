@@ -27,6 +27,7 @@ const { setAuth } = useContext(AuthContext);
       console.log(res)
       if(res.status == 200){
         setAuth(true)
+        localStorage.setItem("user",JSON.stringify(res.data.user))
         navigate("/user/profile")
       }
        if(res.status == 404){
@@ -73,7 +74,7 @@ const { setAuth } = useContext(AuthContext);
                  <b> Password </b>
                 </label>
                 <div className="text-sm">
-                  <a href="#" className="font-semibold text-indigo-400 hover:text-indigo-300">
+                  <a href="/forgot-password" className="font-semibold text-indigo-400 hover:text-indigo-300">
                     Forgot password?
                   </a>
                 </div>
@@ -96,7 +97,7 @@ const { setAuth } = useContext(AuthContext);
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
               >
-                Sign in
+                Log in
               </button>
             </div>
           </form>

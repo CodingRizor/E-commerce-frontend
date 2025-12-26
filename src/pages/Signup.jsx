@@ -22,6 +22,8 @@ function Signup() {
       if(res.status == 201){
         alert(res.data.message)
         navigate("/login")
+      }else if(res.status == 404){
+        alert("Error")
       }
     } catch (error) {
       console.log(error)
@@ -53,7 +55,7 @@ function Signup() {
                 type="text"
                 required
                 autoComplete="name"
-                className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-black/50 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-black outline-1 -outline-offset-1 outline-black/50 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                 {...register("name")}
               />
             </div>
@@ -70,7 +72,7 @@ function Signup() {
                 type="email"
                 required
                 autoComplete="email"
-                className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-black/50 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+                className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-black outline-1 -outline-offset-1 outline-black/50 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
                 {...register("email")}
               />
             </div>
